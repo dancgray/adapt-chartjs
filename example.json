@@ -1,0 +1,12 @@
+{
+    "_id":"c-15",
+    "_parentId":"b-10",
+    "_type":"component",
+    "_component":"chart",
+    "_classes":"",
+    "_layout":"left",
+    "title":"Title of the chart component",
+    "displayTitle": "Title of the media component",
+    "body": "This is optional body text. Select the play button to start the video.",
+    "instruction": ""
+}
