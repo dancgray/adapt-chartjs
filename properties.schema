@@ -27,6 +27,36 @@
       "inputType": "Text",
       "validators": [],
       "help": "This is the instruction text"
-    }
+    },
+    "_chartType": {
+      "type":"string",
+      "required":true,
+      "default": "line",
+      "title":"Chart Type",
+      "enum": ["line", "bar", "radar", "pie", "doughnut"],
+      "inputType": {
+        "type": "Select",
+        "options": ["line", "bar", "radar", "polarArea", "pie", "doughnut"]
+      },
+      "validators": [],
+      "help": "Select the type of chart you want to use."
+    },
+    "_height": {
+      "type":"number",
+      "required":true,
+      "default":260,
+      "title": "Chart Height",
+      "inputType":"Number",
+      "validators": ["required", "number"],
+      "help": "Chart height in pixels"
+    },
+    "_options": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": "TextArea",
+      "validators": [],
+      "help": "Add custom options here. Options must be an object, see <a href='http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options'>chartjs</a>"
+    },
   }
 }
