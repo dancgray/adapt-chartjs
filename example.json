@@ -36,12 +36,10 @@
         ]
     },
     "_options": {
-      "options": {
-          "title": {
-              "display": true,
-              "text": "Custom Chart Title"
-          }
-      }
+        "title": {
+            "display": true,
+            "text": "Custom Chart Title"
+        }
     }
 }
 
@@ -88,12 +86,10 @@
       ]
   },
   "_options": {
-    "options": {
-        "title": {
-            "display": true,
-            "text": "Custom Chart Title"
-        }
-    }
+      "title": {
+          "display": true,
+          "text": "Custom Chart Title"
+      }
   }
 }
 
@@ -138,12 +134,10 @@
       ]
   },
   "_options": {
-    "options": {
-        "title": {
-            "display": true,
-            "text": "Custom Chart Title"
-        }
-    }
+      "title": {
+          "display": true,
+          "text": "Custom Chart Title"
+      }
   }
 }
 
@@ -180,12 +174,10 @@
       }]
   },
   "_options": {
-    "options": {
-        "title": {
-            "display": true,
-            "text": "Custom Chart Title"
-        }
-    }
+      "title": {
+          "display": true,
+          "text": "Custom Chart Title"
+      }
   }
 }
 
@@ -222,11 +214,9 @@
       }]
   },
   "_options": {
-    "options": {
-        "title": {
-            "display": true,
-            "text": "Custom Chart Title"
-        }
-    }
+      "title": {
+          "display": true,
+          "text": "Custom Chart Title"
+      }
   }
 }

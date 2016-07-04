@@ -57,6 +57,6 @@
       "inputType": "TextArea",
       "validators": [],
       "help": "Add custom options here. Options must be an object, see <a href='http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options'>chartjs</a>"
-    },
+    }
   }
 }
