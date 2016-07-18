@@ -57,7 +57,7 @@
   "displayTitle": "Title of the chart component",
   "body": "This is optional body text.",
   "instruction": "",
-  "_chartType": "bar",
+  "_chartType": "line",
   "_height": 300,
   "data": {
       "labels": ["January", "February", "March", "April", "May", "June", "July"],
@@ -106,7 +106,7 @@
   "displayTitle": "Title of the chart component",
   "body": "This is optional body text.",
   "instruction": "",
-  "_chartType": "bar",
+  "_chartType": "radar",
   "_height": 300,
   "data":{
       "labels": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
@@ -154,7 +154,7 @@
   "displayTitle": "Title of the chart component",
   "body": "This is optional body text.",
   "instruction": "",
-  "_chartType": "bar",
+  "_chartType": "pie",
   "_height": 300,
   "data": {
       "labels": ["Red","Blue","Yellow"],
@@ -194,7 +194,7 @@
   "displayTitle": "Title of the chart component",
   "body": "This is optional body text.",
   "instruction": "",
-  "_chartType": "bar",
+  "_chartType": "doughnut",
   "_height": 300,
   "data": {
       "labels": ["Red","Blue","Yellow"],

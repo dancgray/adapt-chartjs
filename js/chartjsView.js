@@ -23,7 +23,7 @@ define([
 
 
         setupChart: function() {
-            var ctx = $("#myChart");
+            var ctx = $("#myChart"+this.model.get('_id'));
             var myChart = new Chart(ctx, {
                 type: this.model.get('_chartType'),
                 data: this.model.get('data'),
