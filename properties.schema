@@ -50,6 +50,17 @@
       "validators": ["required", "number"],
       "help": "Chart height in pixels"
     },
+    "data": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "inputType": {
+        "type": "CodeEditor",
+        "mode": "json"
+      },
+      "validators": [],
+      "help": "Enter your data sets here"
+    },
     "_options": {
       "type": "string",
       "required": false,
