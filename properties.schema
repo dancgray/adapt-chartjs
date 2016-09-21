@@ -51,9 +51,9 @@
       "help": "Chart height in pixels"
     },
     "data": {
-      "type": "string",
+      "type": "object",
       "required": false,
-      "default": "",
+      "default": {},
       "title": "Data Sets",
       "inputType": {
         "type": "CodeEditor",
@@ -63,11 +63,14 @@
       "help": "Enter your labels and data sets here"
     },
     "_options": {
-      "type": "string",
+      "type": "object",
       "required": false,
-      "default": "",
+      "default": {},
       "title": "Options",
-      "inputType": "TextArea",
+      "inputType": {
+        "type": "CodeEditor",
+        "mode": "json"
+      },
       "validators": [],
       "help": "Add custom options here. Options must be an object"
     }
