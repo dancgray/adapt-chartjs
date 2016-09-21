@@ -54,20 +54,22 @@
       "type": "string",
       "required": false,
       "default": "",
+      "title": "Data Sets",
       "inputType": {
         "type": "CodeEditor",
         "mode": "json"
       },
       "validators": [],
-      "help": "Enter your data sets here"
+      "help": "Enter your labels and data sets here"
     },
     "_options": {
       "type": "string",
       "required": false,
       "default": "",
+      "title": "Options",
       "inputType": "TextArea",
       "validators": [],
-      "help": "Add custom options here. Options must be an object, see <a href='http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options'>chartjs</a>"
+      "help": "Add custom options here. Options must be an object"
     }
   }
 }
