@@ -50,13 +50,29 @@
       "validators": ["required", "number"],
       "help": "Chart height in pixels"
     },
-    "_options": {
-      "type": "string",
+    "data": {
+      "type": "object",
       "required": false,
-      "default": "",
-      "inputType": "TextArea",
+      "default": {},
+      "title": "Data Sets",
+      "inputType": {
+        "type": "CodeEditor",
+        "mode": "json"
+      },
       "validators": [],
-      "help": "Add custom options here. Options must be an object, see <a href='http://www.chartjs.org/docs/#chart-configuration-creating-a-chart-with-options'>chartjs</a>"
+      "help": "Enter your labels and data sets here"
+    },
+    "_options": {
+      "type": "object",
+      "required": false,
+      "default": {},
+      "title": "Options",
+      "inputType": {
+        "type": "CodeEditor",
+        "mode": "json"
+      },
+      "validators": [],
+      "help": "Add custom options here. Options must be an object"
     }
   }
 }
