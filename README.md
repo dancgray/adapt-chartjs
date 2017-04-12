@@ -1,7 +1,10 @@
 # adapt-chart  
 
+This is a container for displaying [Chart.js](http://www.chartjs.org/) charts in the Adapt framework and authoring tool.  You will need to read the Chart.js [documentation](http://www.chartjs.org/docs/) to create charts using this plugin.
 
-##Installation
+
+
+### Installation
 
 
 
@@ -19,8 +22,53 @@
 **instruction** (string): This optional text appears above the component. It is frequently used to
 guide the learner’s interaction with the component.  
 
-<div float align=right><a href="#top">Back to Top</a></div>
+**_chartType** (string): Select the type of chart to display. 
 
+**_height** (number): Set the height of the chart
+
+**data** (object): Set datasets and labels. See Chart.js documentation for details. 
+
+Line chart example:
+
+```JSON
+{
+    "labels": ["Eating", "Drinking", "Sleeping", "Designing", "Coding", "Cycling", "Running"],
+    "datasets": [{
+        "label": "My First dataset",
+        "backgroundColor": "rgba(179,181,198,0.2)",
+        "borderColor": "rgba(179,181,198,1)",
+        "pointBackgroundColor": "rgba(179,181,198,1)",
+        "pointBorderColor": "#fff",
+        "pointHoverBackgroundColor": "#fff",
+        "pointHoverBorderColor": "rgba(179,181,198,1)",
+        "data": [65, 59, 90, 81, 56, 55, 40]
+    }, {
+        "label": "My Second dataset",
+        "backgroundColor": "rgba(255,99,132,0.2)",
+        "borderColor": "rgba(255,99,132,1)",
+        "pointBackgroundColor": "rgba(255,99,132,1)",
+        "pointBorderColor": "#fff",
+        "pointHoverBackgroundColor": "#fff",
+        "pointHoverBorderColor": "rgba(255,99,132,1)",
+        "data": [28, 48, 40, 19, 96, 27, 100]
+    }]
+}
+```
+
+**_options** (object): Add specifc chart options here. See Chart.js [docs](http://www.chartjs.org/docs/#line-chart-chart-options).
+
+Line chart example:
+
+```JSON
+{
+    "title": {
+        "display": true,
+        "text": "Custom Chart Title"
+    }
+}
+```
+
+<div float align=right><a href="#top">Back to Top</a></div>
 
 ### JSON Examples  
 
