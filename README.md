@@ -28,7 +28,7 @@ guide the learner’s interaction with the component.
 
 **data** (object): Set datasets and labels. See Chart.js documentation for details. 
 
-Line chart example:
+Line chart example for authoring tool:
 
 ```JSON
 {
@@ -57,7 +57,7 @@ Line chart example:
 
 **_options** (object): Add specifc chart options here. See Chart.js [docs](http://www.chartjs.org/docs/#line-chart-chart-options).
 
-Line chart example:
+Line chart example for authoring tool:
 
 ```JSON
 {
