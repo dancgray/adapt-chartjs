@@ -19,6 +19,7 @@ define([
 
         postRender: function() {
             this.setupChart();
+            this.$('.component-widget').on('inview', _.bind(this.inview, this));
         },
 
 
@@ -72,6 +73,7 @@ define([
                     obj.style.display = "none";
                 }
             }
+            this.$('.component-widget').off('inview');
             ComponentView.prototype.remove.call(this);
         },
 
