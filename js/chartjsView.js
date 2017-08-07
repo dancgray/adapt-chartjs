@@ -14,6 +14,7 @@ define([
             this.listenTo(Adapt, 'device:resize', this.onScreenSizeChanged);
             this.listenTo(Adapt, 'device:changed', this.onDeviceChanged);
             this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
+            this.listenTo(this.model, 'change:data', this.onDataChanged);
             this.checkIfResetOnRevisit();
         },
 
@@ -24,7 +25,7 @@ define([
 
         setupChart: function() {
             var ctx = $("#myChart"+this.model.get('_id'));
-            var myChart = new Chart(ctx, {
+            var chart = new Chart(ctx, {
                 type: this.model.get('_chartType'),
                 data: this.model.get('data'),
                 options: this.model.get('_options')
@@ -32,6 +33,15 @@ define([
 
             this.setReadyStatus();
 
+            this.model.set("_chart", chart);
+        },
+
+        onDataChanged: function() {
+            var chart = this.model.get("_chart");
+
+            if (chart) {
+                chart.update();
+            }
         },
 
         setupEventListeners: function() {
