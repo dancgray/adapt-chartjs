@@ -33,10 +33,10 @@
       "required":true,
       "default": "line",
       "title":"Chart Type",
-      "enum": ["line", "bar", "radar", "pie", "doughnut"],
+      "enum": ["line", "bar", "horizontalBar", "radar", "polarArea", "pie", "doughnut"],
       "inputType": {
         "type": "Select",
-        "options": ["line", "bar", "radar", "polarArea", "pie", "doughnut"]
+        "options": ["line", "bar", "horizontalBar", "radar", "polarArea", "pie", "doughnut"]
       },
       "validators": [],
       "help": "Select the type of chart you want to use."
