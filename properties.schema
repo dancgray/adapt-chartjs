@@ -73,6 +73,15 @@
       },
       "validators": [],
       "help": "Add custom options here. Options must be an object"
+    },
+    "alt": {
+      "type": "string",
+      "required": false,
+      "default": "",
+      "title": "Alt text",
+      "inputType": "Text",
+      "validators": [],
+      "help": "Textual description of the chart"
     }
   }
 }
