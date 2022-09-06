@@ -1,8 +1,8 @@
 define([
     'coreJS/adapt',
     'coreViews/componentView',
-    './Chart.min'
-], function(Adapt, ComponentView, Chart) {
+    'libraries/chart.min'
+], function (Adapt, ComponentView, Chart) {
 
     var ChartJSView = ComponentView.extend({
 
@@ -10,7 +10,7 @@ define([
 
         },
 
-        preRender: function() {
+        preRender: function () {
             this.listenTo(Adapt, 'device:resize', this.onScreenSizeChanged);
             this.listenTo(Adapt, 'device:changed', this.onDeviceChanged);
             this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
@@ -18,17 +18,32 @@ define([
             this.checkIfResetOnRevisit();
         },
 
-        postRender: function() {
+        postRender: function () {
+            this.dynamicInsert()
             this.setupChart();
             this.$('.component-widget').on('inview', _.bind(this.inview, this));
         },
 
+        dynamicInsert: async function () {
+            // remove "data" model object
+                var dataURL = this.model.get('data').datasets[0].dataURL;
+                const fetchJson = async () => {
+                    const response = await fetch(dataURL)
+                    const json = await response.json()
+                    // urlData = json
+                    return json
+                }
+                return await fetchJson();
+        },
 
-        setupChart: function() {
-            var ctx = $("#myChart"+this.model.get('_id'));
+        setupChart: async function () {
+            var ctx = $("#myChart" + this.model.get('_id'));
+
+            this.model.get('data').datasets[0].data = await this.dynamicInsert()
+            
             var chart = new Chart(ctx, {
                 type: this.model.get('_chartType'),
-                data: this.model.get('data'),
+                data: await this.model.get('data'),
                 options: this.model.get('_options')
             });
 
@@ -36,20 +51,23 @@ define([
 
             this.model.set("_chart", chart);
         },
+        // create funciton which gets fetched data and sets it to the data model object
 
-        onDataChanged: function() {
+
+        onDataChanged: function () {
             var chart = this.model.get("_chart");
+            console.log(chart)
 
             if (chart) {
                 chart.update();
             }
         },
 
-        setupEventListeners: function() {
+        setupEventListeners: function () {
 
         },
 
-        checkIfResetOnRevisit: function() {
+        checkIfResetOnRevisit: function () {
             var isResetOnRevisit = this.model.get('_isResetOnRevisit');
 
             // If reset is enabled set defaults
@@ -58,7 +76,7 @@ define([
             }
         },
 
-        inview: function(event, visible, visiblePartX, visiblePartY) {
+        inview: function (event, visible, visiblePartX, visiblePartY) {
             if (visible) {
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
@@ -76,7 +94,7 @@ define([
             }
         },
 
-        remove: function() {
+        remove: function () {
             if ($("html").is(".ie8")) {
                 var obj = this.$("object")[0];
                 if (obj) {
@@ -87,19 +105,19 @@ define([
             ComponentView.prototype.remove.call(this);
         },
 
-        onCompletion: function() {
+        onCompletion: function () {
             this.setCompletionStatus();
         },
 
-        onDeviceChanged: function() {
+        onDeviceChanged: function () {
 
         },
 
-        onScreenSizeChanged: function() {
+        onScreenSizeChanged: function () {
 
         },
 
-        onAccessibilityToggle: function() {
+        onAccessibilityToggle: function () {
 
         }
 
