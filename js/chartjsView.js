@@ -10,7 +10,6 @@
         }
 
         postRender() {
-            this.dynamicInsert()
             this.setupChart();
             this.setupInview();
         }
@@ -21,9 +20,6 @@
             this.setupInviewCompletion(selector);
         }
 
-        /**
-            * determines which element should be used for inview logic - body, instruction or title - and returns the selector for that element
-        */
         getInviewElementSelector() {
             if (this.model.get('body')) return '.component__body';
             if (this.model.get('instruction')) return '.component__instruction';
@@ -32,7 +28,6 @@
         }
 
         async dynamicInsert (dataURL) {
-                //var dataURL = this.model.get('data').datasets[0].dataURL;
                 const fetchJson = async () => {
                     const response = await fetch(dataURL)
                     const json = await response.json()
@@ -44,13 +39,11 @@
         async setupChart () {
             var ctx = $("#myChart" + this.model.get('_id'));
 
-            this.model.get('data').datasets.map( await dataset => {
-                console.log(dataset);
+            await Promise.all(this.model.get('data').datasets.map(async (dataset) => {
                 if (dataset.dataURL) {
-                    dataset.data = this.dynamicInsert(dataset.dataURL);
+                    dataset.data = await this.dynamicInsert(dataset.dataURL);
                 }
-            });
-            //this.model.get('data').datasets[0].data = await this.dynamicInsert()
+            }));
 
             var chart = new Chart(ctx, {
                 type: this.model.get('_chartType'),
