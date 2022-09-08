@@ -6,9 +6,9 @@
     export default class ChartJSView extends ComponentView {
   
         preRender() {
-            this.listenTo(Adapt, 'device:resize', this.onScreenSizeChanged);
-            this.listenTo(Adapt, 'device:changed', this.onDeviceChanged);
-            this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
+//            this.listenTo(Adapt, 'device:resize', this.onScreenSizeChanged);
+//            this.listenTo(Adapt, 'device:changed', this.onDeviceChanged);
+//            this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
             this.listenTo(this.model, 'change:data', this.onDataChanged);
             // this.checkIfResetOnRevisit();
         }
@@ -16,7 +16,23 @@
         postRender() {
             this.dynamicInsert()
             this.setupChart();
-            this.$('.component-widget').on('inview', _.bind(this.inview, this));
+            this.setupInview();
+        }
+
+        setupInview() {
+            const selector = this.getInviewElementSelector();
+            if (!selector) return this.setCompletionStatus();
+            this.setupInviewCompletion(selector);
+        }
+
+        /**
+            * determines which element should be used for inview logic - body, instruction or title - and returns the selector for that element
+        */
+        getInviewElementSelector() {
+            if (this.model.get('body')) return '.component__body';
+            if (this.model.get('instruction')) return '.component__instruction';
+            if (this.model.get('displayTitle')) return '.component__title';
+            return null;
         }
 
         async dynamicInsert () {
@@ -53,7 +69,7 @@
                 chart.update();
             }
         }
-
+/*
         setupEventListeners() {
 
         }
@@ -68,6 +84,7 @@
         }
 
         inview(event, visible, visiblePartX, visiblePartY) {
+            console.log("Setting inview");
             if (visible) {
                 if (visiblePartY === 'top') {
                     this._isVisibleTop = true;
@@ -111,5 +128,5 @@
         onAccessibilityToggle() {
 
         }
-
+*/
     }
