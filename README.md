@@ -28,6 +28,10 @@ guide the learner’s interaction with the component.
 
 **data** (object): Set datasets and labels. See Chart.js documentation for details. 
 
+and/or 
+
+**dataURL** (URL): URL of a data file to load. Note: the format of this file must be a raw json array of numbers, the same as if you were simply typing it in, e.g. "[65, 59, 90, 81, 56, 55, 40]"
+
 Line chart example for authoring tool:
 
 ```JSON

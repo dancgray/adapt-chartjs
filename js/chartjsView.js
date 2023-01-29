@@ -1,110 +1,68 @@
-define([
-    'coreJS/adapt',
-    'coreViews/componentView',
-    './Chart.min'
-], function(Adapt, ComponentView, Chart) {
 
-    var ChartJSView = ComponentView.extend({
-
-        events: {
-
-        },
-
-        preRender: function() {
-            this.listenTo(Adapt, 'device:resize', this.onScreenSizeChanged);
-            this.listenTo(Adapt, 'device:changed', this.onDeviceChanged);
-            this.listenTo(Adapt, 'accessibility:toggle', this.onAccessibilityToggle);
+    import Adapt from 'core/js/adapt';
+    import ComponentView from 'core/js/views/componentView';
+    import Chart from 'libraries/chart.min'
+    
+    export default class ChartJSView extends ComponentView {
+  
+        preRender() {
             this.listenTo(this.model, 'change:data', this.onDataChanged);
-            this.checkIfResetOnRevisit();
-        },
+        }
 
-        postRender: function() {
+        postRender() {
             this.setupChart();
-            this.$('.component-widget').on('inview', _.bind(this.inview, this));
-        },
+            this.setupInview();
+        }
 
+        setupInview() {
+            const selector = this.getInviewElementSelector();
+            if (!selector) return this.setCompletionStatus();
+            this.setupInviewCompletion(selector);
+        }
 
-        setupChart: function() {
-            var ctx = $("#myChart"+this.model.get('_id'));
+        getInviewElementSelector() {
+            if (this.model.get('body')) return '.component__body';
+            if (this.model.get('instruction')) return '.component__instruction';
+            if (this.model.get('displayTitle')) return '.component__title';
+            return null;
+        }
+
+        async dynamicInsert (dataURL) {
+                const fetchJson = async () => {
+                    const response = await fetch(dataURL)
+                    const json = await response.json()
+                    return json
+                }
+                return await fetchJson();
+        }
+
+        async setupChart () {
+            var ctx = $("#myChart" + this.model.get('_id'));
+
+            await Promise.all(this.model.get('data').datasets.map(async (dataset) => {
+                if (dataset.dataURL) {
+                    dataset.data = await this.dynamicInsert(dataset.dataURL);
+                }
+            }));
+
             var chart = new Chart(ctx, {
                 type: this.model.get('_chartType'),
-                data: this.model.get('data'),
+                data: await this.model.get('data'),
                 options: this.model.get('_options')
             });
 
             this.setReadyStatus();
 
             this.model.set("_chart", chart);
-        },
-
-        onDataChanged: function() {
+        }
+        
+        onDataChanged() {
             var chart = this.model.get("_chart");
+            console.log(chart)
 
             if (chart) {
                 chart.update();
             }
-        },
-
-        setupEventListeners: function() {
-
-        },
-
-        checkIfResetOnRevisit: function() {
-            var isResetOnRevisit = this.model.get('_isResetOnRevisit');
-
-            // If reset is enabled set defaults
-            if (isResetOnRevisit) {
-                this.model.reset(isResetOnRevisit);
-            }
-        },
-
-        inview: function(event, visible, visiblePartX, visiblePartY) {
-            if (visible) {
-                if (visiblePartY === 'top') {
-                    this._isVisibleTop = true;
-                } else if (visiblePartY === 'bottom') {
-                    this._isVisibleBottom = true;
-                } else {
-                    this._isVisibleTop = true;
-                    this._isVisibleBottom = true;
-                }
-
-                if (this._isVisibleTop && this._isVisibleBottom) {
-                    this.$('.component-inner').off('inview');
-                    this.setCompletionStatus();
-                }
-            }
-        },
-
-        remove: function() {
-            if ($("html").is(".ie8")) {
-                var obj = this.$("object")[0];
-                if (obj) {
-                    obj.style.display = "none";
-                }
-            }
-            this.$('.component-widget').off('inview');
-            ComponentView.prototype.remove.call(this);
-        },
-
-        onCompletion: function() {
-            this.setCompletionStatus();
-        },
-
-        onDeviceChanged: function() {
-
-        },
-
-        onScreenSizeChanged: function() {
-
-        },
-
-        onAccessibilityToggle: function() {
-
         }
 
-    });
-
-    return ChartJSView;
-
-});
+    }
